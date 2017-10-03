@@ -20,4 +20,6 @@ Edit the code in the `function` folder in this sample.
 
 1. Install JDK 8
 2. Install [SBT](http://www.scala-sbt.org/download.html)
-3. run `sbt assembly`. It generates the jar file at `target/scala-2.12/openfaas-scala-afterburn-assembly-[version].jar`
+3. run `sbt assembly`
+
+JAR file can be found at `target/scala-2.12/openfaas-scala-afterburn-assembly-[version].jar`.
