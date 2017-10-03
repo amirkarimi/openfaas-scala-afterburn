@@ -14,7 +14,7 @@ https://www.youtube.com/watch?v=gG6z-4a1gpQ&feature=youtu.be
 
 Build the watchdog with the code in the `fast_fork` branch in the faas repo.
 
-Edit the code in the `function` folder in this sample.
+Edit the code in the `src/main/scala/function` folder in this sample.
 
 ## Generate JAR file
 
