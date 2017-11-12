@@ -9,15 +9,20 @@ object HttpParser {
     val maybeHttpHeader = HttpHeader.parse(source)
 
     maybeHttpHeader match {
-      case None => System.err.println("Couldn't parse http header")
+      case None =>
+        System.err.println("Couldn't parse http header")
+        val httpResponse = HttpResponse(
+          status = "400 Bad Request",
+          body = "Couldn't parse http header",
+          contentType = Some("text/plain")
+        )
       case Some(httpHeader) =>
         System.err.println(s"${httpHeader.method} method")
-        httpHeader.contentLength.map { contentLength =>
-          System.err.println(s"${contentLength} bytes")
+        httpHeader.contentLength.foreach { contentLength =>
+          System.err.println(s"$contentLength bytes")
         }
 
-        val body = source.mkString
-        val response = Handler.function(body, httpHeader.method)
+        val response = Handler.function(source, httpHeader)
 
         val httpResponse = HttpResponse(
           status = "200 OK",
