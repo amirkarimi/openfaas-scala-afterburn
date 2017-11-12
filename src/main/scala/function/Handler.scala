@@ -1,7 +1,5 @@
 package function
 
-import java.io.{File, FileOutputStream, PrintWriter}
-
 import com.openfaas.HttpHeader
 
 import scala.io.Source
@@ -14,26 +12,18 @@ object Handler {
           case None => "Hi from your Scala function. The content length is not specified."
           case Some(len) =>
 
-            val log = new PrintWriter( new PrintWriter(new FileOutputStream(
-              new File("/home/amir/log.txt"),
-              true /* append = true */))
-            )
-
-            log.println(s"len: ${len}")
-            log.flush()
+            System.err.println(s"len: ${len}")
 
             var str = ""
             var i = 0
             // Blocks here receiving the second POST request!!!
             while(i < len && input.hasNext) {
-              log.println(s"iter[${i}]")
-              log.flush()
+              System.err.println(s"iter[${i}]")
               str += input.next()
               i = i + 1
             }
 
-            log.println(s"str: ${str}")
-            log.flush()
+            System.err.println(s"str: ${str}")
             s"Hi from your Scala function. You said: $str"
         }
 

@@ -2,24 +2,49 @@
 
 Scala sample running in Fast Fork mode on [OpenFaaS](openfaas.com)
 
-* For notes on how this works please see the `Optimizing for performance` section of the Watchdog notes:
+## Prerequisites
 
-https://github.com/alexellis/faas/tree/fast_fork/watchdog
+* JDK 8
+* [SBT](http://www.scala-sbt.org/download.html)
 
-* Video showing this in action:
 
-https://www.youtube.com/watch?v=gG6z-4a1gpQ&feature=youtu.be
+## Build and Deploy to OpenFaaS
 
-* Work with the sample:
+* Build the new version of watchdog supporting Afterburn. Navigate to another dir.
 
-Build the watchdog with the code in the `fast_fork` branch in the faas repo.
+```
+git clone git@github.com:openfaas-incubator/of-watchdog.git \
+cd of-watchdog \
+./build.sh
+```
 
-Edit the code in the `src/main/scala/function` folder in this sample.
+* Copy `of-watchdog` to `openfaas` dir of the current project.
 
-## Generate JAR file
+* Build and copy the JAR file to `openfaas` 
+```
+sbt assembly && cp target/scala-2.12/openfaas-scala-afterburn-assembly-0.1.0-SNAPSHOT.jar openfaas/
+```
 
-1. Install JDK 8
-2. Install [SBT](http://www.scala-sbt.org/download.html)
-3. run `sbt assembly`
+* [Setup OpenFaaS](https://github.com/openfaas/faas#get-started-with-openfaas)
 
-JAR file can be found at `target/scala-2.12/openfaas-scala-afterburn-assembly-[version].jar`.
+* Install [openfaas-cli](https://github.com/openfaas/faas-cli).
+
+* Build and deploy the docker image
+
+```
+faas-cli build -f openfaas.yml && faas-cli deploy -f openfaas.yml
+```
+
+## Run watchdog locally
+
+This is useful for testing/debugging:
+
+* Build and copy `of-watchdog` and `JAR` file as described in last section. 
+
+* Run watchdog:
+
+```
+mode=afterburn fprocess="java -jar openfaas-scala-afterburn-assembly-0.1.0-SNAPSHOT.jar" ./of-watchdog
+```
+
+* Send the requests to `localhost:8081`

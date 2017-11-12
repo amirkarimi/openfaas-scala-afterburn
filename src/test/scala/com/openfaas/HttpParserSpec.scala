@@ -77,12 +77,10 @@ class HttpParserSpec extends WordSpec with Matchers {
         s"""|POST  HTTP/1.1
             |Host: localhost:8081
             |Content-Length: ${content1.length}
-            |Content-Type: application/x-www-form-urlencoded
             |
             |${content1}POST  HTTP/1.1
             |Host: localhost:8081
             |Content-Length: ${content2.length}
-            |Content-Type: application/x-www-form-urlencoded
             |
             |${content2}""".stripMargin
 
