@@ -25,7 +25,7 @@ cd of-watchdog \
 sbt assembly && cp target/scala-2.12/openfaas-scala-afterburn-assembly-0.1.0-SNAPSHOT.jar openfaas/
 ```
 
-* [Setup OpenFaaS](https://github.com/openfaas/faas#get-started-with-openfaas)
+* [Deploy OpenFaaS](https://github.com/openfaas/faas#get-started-with-openfaas)
 
 * Install [openfaas-cli](https://github.com/openfaas/faas-cli).
 
@@ -35,9 +35,13 @@ sbt assembly && cp target/scala-2.12/openfaas-scala-afterburn-assembly-0.1.0-SNA
 faas-cli build -f openfaas.yml && faas-cli deploy -f openfaas.yml
 ```
 
+* Navigate to `http://127.0.0.1:8080/ui/` and run `scala_fastburn` function 
+
 ## Run watchdog locally
 
-This is useful for testing/debugging:
+This is useful for testing/debugging purposes.
+
+To run the watchdog locally:
 
 * Build and copy `of-watchdog` and `JAR` file as described in last section. 
 

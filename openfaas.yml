@@ -3,7 +3,7 @@ provider:
   gateway: http://localhost:8080
 
 functions:
-  scala-test:
+  scala_fastburn:
     lang: Dockerfile
     handler: ./openfaas
     image: openfaas-scala-afterburn
