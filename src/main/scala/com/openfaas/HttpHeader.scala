@@ -1,7 +1,5 @@
 package com.openfaas
 
-import scala.io.Source
-
 case class HttpHeader(
   method: String,
   headers: Map[String, String]
@@ -10,8 +8,16 @@ case class HttpHeader(
 }
 
 object HttpHeader {
-  def parse(source: Source): Option[HttpHeader] = {
-    val headerLines = source.getLines().takeWhile(!_.isEmpty).toList
+  def parse(iter: Iterator[Char]): Option[HttpHeader] = {
+    def readLine() = iter
+      .filter(_ != '\r')
+      .takeWhile(_ != '\n')
+
+    val headerLines = Iterator
+      .continually(readLine().mkString)
+      .takeWhile(_.nonEmpty)
+      .toList
+
     parse(headerLines)
   }
 

@@ -1,17 +1,19 @@
 package com.openfaas
 
-import java.io.BufferedWriter
+import java.io.{BufferedWriter, DataInputStream}
+
 import function.Handler
-import scala.io.Source
 
 object HttpParser {
-  def acceptIncoming(source: Source, out: BufferedWriter): Unit = {
-    val maybeHttpHeader = HttpHeader.parse(source)
+  def acceptIncoming(in: DataInputStream, out: BufferedWriter): Unit = {
+    val iter = DataInputStreamHelper.toIterator(in)
 
-    maybeHttpHeader match {
+    val maybeHttpHeader = HttpHeader.parse(iter)
+
+    val response = maybeHttpHeader match {
       case None =>
         System.err.println("Couldn't parse http header")
-        val httpResponse = HttpResponse(
+        HttpResponse(
           status = "400 Bad Request",
           body = "Couldn't parse http header",
           contentType = Some("text/plain")
@@ -22,16 +24,16 @@ object HttpParser {
           System.err.println(s"$contentLength bytes")
         }
 
-        val response = Handler.function(source, httpHeader)
+        val response = Handler.function(iter, httpHeader)
 
-        val httpResponse = HttpResponse(
+        HttpResponse(
           status = "200 OK",
           body = response,
           contentType = Some("text/plain")
         )
-
-        httpResponse.serialize(out)
-        out.flush()
     }
+
+    response.serialize(out)
+    out.flush()
   }
 }

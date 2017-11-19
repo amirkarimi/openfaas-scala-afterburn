@@ -1,10 +1,8 @@
 package com.openfaas
 
-import java.io.{BufferedWriter, StringWriter}
+import java.io.{BufferedWriter, ByteArrayInputStream, DataInputStream, StringWriter}
 
 import org.scalatest._
-
-import scala.io.Source
 
 class HttpParserSpec extends WordSpec with Matchers {
   "The HttpParser" should {
@@ -25,7 +23,7 @@ class HttpParserSpec extends WordSpec with Matchers {
             |
          |${content}""".stripMargin
 
-      val source = Source.fromString(sourceStr)
+      val source = toDataInputStream(sourceStr)
       val writer = new StringWriter()
       val out = new BufferedWriter(writer)
 
@@ -52,7 +50,7 @@ class HttpParserSpec extends WordSpec with Matchers {
             |
          |${content}""".stripMargin
 
-      val source = Source.fromString(sourceStr)
+      val source = toDataInputStream(sourceStr)
       val writer = new StringWriter()
       val out = new BufferedWriter(writer)
 
@@ -84,7 +82,7 @@ class HttpParserSpec extends WordSpec with Matchers {
             |
             |${content2}""".stripMargin
 
-      val source = Source.fromString(sourceStr)
+      val source = toDataInputStream(sourceStr)
       val writer = new StringWriter()
       val out = new BufferedWriter(writer)
 
@@ -104,4 +102,9 @@ class HttpParserSpec extends WordSpec with Matchers {
       writer.toString shouldBe expectedOutput(content1) + expectedOutput(content2)
     }
   }
+
+  def toDataInputStream(str: String) = new DataInputStream(
+    new ByteArrayInputStream(str.getBytes)
+  )
+
 }
