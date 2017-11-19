@@ -1,9 +1,0 @@
-provider:
-  name: faas
-  gateway: http://localhost:8080
-
-functions:
-  scala_afterburn:
-    lang: Dockerfile
-    handler: ./openfaas_afterburn
-    image: openfaas-scala-afterburn
