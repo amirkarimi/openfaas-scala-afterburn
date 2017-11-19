@@ -32,10 +32,10 @@ sbt assembly && cp target/scala-2.12/openfaas-scala-afterburn-assembly-0.1.0-SNA
 * Build and deploy the docker image
 
 ```
-faas-cli build -f openfaas.yml && faas-cli deploy -f openfaas.yml
+faas-cli build -f openfaas_afterburn.yml && faas-cli deploy -f openfaas_afterburn.yml
 ```
 
-* Navigate to `http://127.0.0.1:8080/ui/` and run `scala_fastburn` function 
+* Navigate to `http://127.0.0.1:8080/ui/` and run `scala_afterburn` function 
 
 ## Run watchdog locally
 
