@@ -1,10 +1,8 @@
 # Scala OpenFaaS Afterburn Sample
 
-Scala sample running in Fast Fork mode on [OpenFaaS](openfaas.com).
+Scala sample running in Fast Fork mode on [OpenFaaS](openfaas.com). To be used in combination with [OpenFaaS JVM template](https://github.com/amirkarimi/openfaas-jvm-afterburn-template).
 
 ## Build and Deploy to OpenFaaS
-
-
 
 * Deploy [OpenFaaS](https://github.com/openfaas/faas#get-started-with-openfaas)
 
