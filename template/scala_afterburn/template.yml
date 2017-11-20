@@ -1,2 +1,0 @@
-language: scala-afterburn
-fprocess: java -jar /app.jar
