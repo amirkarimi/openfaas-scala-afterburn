@@ -4,6 +4,8 @@ Scala sample running in Fast Fork mode on [OpenFaaS](openfaas.com). To be used i
 
 ## Build and Deploy to OpenFaaS
 
+NOTE: Under development!
+
 * Deploy [OpenFaaS](https://github.com/openfaas/faas#get-started-with-openfaas)
 
 * Install [OpenFaaS CLI](https://github.com/openfaas/faas-cli#get-started-install-the-cli)
